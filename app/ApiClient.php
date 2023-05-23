@@ -46,7 +46,7 @@ class ApiClient
         $cacheFile = "cache/comments{$authorId}.json";
         $currentTime = time();
         if (file_exists($cacheFile) && ($currentTime - filemtime($cacheFile)) < 300) {
-            $responseJson = json_decode(file_get_contents($cacheFile));
+            $responseJson = file_get_contents($cacheFile);
         } else {
             $response = $this->client->get("https://jsonplaceholder.typicode.com/users/$authorId/posts");
             $responseJson = $response->getBody()->getContents();
@@ -108,7 +108,7 @@ class ApiClient
         $cacheFile = "cache/comments{$articleId}.json";
         $currentTime = time();
         if (file_exists($cacheFile) && ($currentTime - filemtime($cacheFile)) < 300) {
-            $responseJson = json_decode(file_get_contents($cacheFile));
+            $responseJson = file_get_contents($cacheFile);
         } else {
             $response = $this->client->get("https://jsonplaceholder.typicode.com/posts/$articleId/comments");
             $responseJson = $response->getBody()->getContents();
@@ -169,7 +169,7 @@ class ApiClient
         $cacheFile = "cache/post{$id}.json";
         $currentTime = time();
         if (file_exists($cacheFile) && ($currentTime - filemtime($cacheFile)) < 300) {
-            $responseJson = json_decode(file_get_contents($cacheFile));
+            $responseJson = file_get_contents($cacheFile);
         } else {
             $response = $this->client->get("https://jsonplaceholder.typicode.com/posts/$id");
             $responseJson = $response->getBody()->getContents();

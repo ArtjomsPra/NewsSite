@@ -1,0 +1,21 @@
+{
+    "name": "artjo/news-site",
+    "autoload": {
+        "psr-4": {
+            "NewsSite\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ArtjomsPra",
+            "email": "artjoms.pralics@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.7",
+        "twig/twig": "^3.6",
+        "nikic/fast-route": "^1.3",
+        "ext-json": "*",
+        "ext-readline": "*"
+    }
+}

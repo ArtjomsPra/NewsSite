@@ -5,26 +5,32 @@ namespace NewsSite\Models;
 class Post
 {
     private int $id;
+    private int $userId;
     private string $title;
     private string $body;
-    private User $user;
+    private ?User $user = null;
 
     public function __construct(
         int    $id,
+        int    $userId,
         string $title,
-        string $body,
-        User   $user
+        string $body
     )
     {
         $this->id = $id;
+        $this->userId = $userId;
         $this->title = $title;
         $this->body = $body;
-        $this->user = $user;
     }
 
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getUserId(): int
+    {
+        return $this->userId;
     }
 
     public function getTitle(): string
@@ -37,8 +43,13 @@ class Post
         return $this->body;
     }
 
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
+    }
+
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 }

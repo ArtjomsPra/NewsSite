@@ -2,19 +2,31 @@
 
 namespace NewsSite\Services\Articles;
 
-use NewsSite\ApiClient;
+use NewsSite\Repositories\Article\ArticleRepository;
+use NewsSite\Repositories\Article\JsonPlaceholderArticleRepository;
+use NewsSite\Repositories\Author\AuthorRepository;
+use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
 
 class IndexArticleService
 {
-    private ApiClient $client;
+    private ArticleRepository $articleRepository;
+    private AuthorRepository $authorRepository;
 
     public function __construct()
     {
-        $this->client = new ApiClient();
+        $this->articleRepository = new JsonPlaceholderArticleRepository();
+        $this->authorRepository = new JsonPlaceholderAuthorRepository();
     }
 
     public function execute(): array
     {
-        return $this->client->fetchPosts();
+        $articles = $this->articleRepository->fetchAll();
+
+        foreach ($articles as $article) {
+            $user = $this->authorRepository->fetchSingleUser($article->getUserId());
+            $article->setUser($user);
+        }
+
+        return $articles;
     }
 }

@@ -2,19 +2,22 @@
 
 namespace NewsSite\Services\Users;
 
-use NewsSite\ApiClient;
+use NewsSite\Repositories\Author\AuthorRepository;
+use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
+
+
 class IndexUserService
 {
-    private ApiClient $client;
+    private AuthorRepository $authorRepository;
 
     public function __construct()
     {
-        $this->client = new ApiClient();
+        $this->authorRepository = new JsonPlaceholderAuthorRepository();
     }
 
     public function execute(): array
     {
-        return $this->client->fetchUsers();
+        return $this->authorRepository->fetchAll();
     }
 }
 

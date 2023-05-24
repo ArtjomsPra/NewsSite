@@ -2,24 +2,37 @@
 
 namespace NewsSite\Services\Users\Show;
 
-use NewsSite\ApiClient;
+use NewsSite\Repositories\Article\ArticleRepository;
+use NewsSite\Repositories\Article\JsonPlaceholderArticleRepository;
+use NewsSite\Repositories\Author\AuthorRepository;
+use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
+use NewsSite\Models\Post;
+
 
 class ShowUserService
 {
-    private ApiClient $client;
+   private ArticleRepository $articleRepository;
+   private AuthorRepository $authorRepository;
 
     public function __construct()
     {
-        $this->client = new ApiClient();
+        $this->articleRepository = new JsonPlaceholderArticleRepository();
+        $this->authorRepository = new JsonPlaceholderAuthorRepository();
     }
 
     public function execute(ShowUserServiceRequest $request): ShowUserServiceResponse
     {
         $authorId = $request->getAuthorId();
 
-        $author = $this->client->fetchSingleUser($authorId);
+        $author = $this->authorRepository->fetchSingleUser($authorId);
 
-        $articles = $this->client->fetchPostsByAuthorId($authorId);
+        $articles = $this->articleRepository->fetchAllByAuthorId($authorId);
+
+        foreach ($articles as $article) {
+            /** @var Post $article */
+            $articleAuthor = $this->authorRepository->fetchSingleUser($author->getId());
+            $article->setUser($articleAuthor);
+        }
 
         return new ShowUserServiceResponse($author, $articles);
     }

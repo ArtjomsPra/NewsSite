@@ -2,24 +2,37 @@
 
 namespace NewsSite\Services\Articles\Show;
 
-use NewsSite\ApiClient;
+use NewsSite\Repositories\Article\ArticleRepository;
+use NewsSite\Repositories\Article\JsonPlaceholderArticleRepository;
+use NewsSite\Repositories\Author\AuthorRepository;
+use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
+use NewsSite\Repositories\Comment\CommentRepository;
+use NewsSite\Repositories\Comment\JsonPlaceholderCommentRepository;
 
 class ShowArticleService
 {
-    private ApiClient $client;
+    private ArticleRepository $articleRepository;
+    private AuthorRepository $authorRepository;
+    private CommentRepository $commentRepository;
 
     public function __construct()
     {
-        $this->client = new ApiClient();
+        $this->articleRepository = new JsonPlaceholderArticleRepository();
+        $this->authorRepository = new JsonPlaceholderAuthorRepository();
+        $this->commentRepository = new JsonPlaceholderCommentRepository();
     }
 
     public function execute(ShowArticleServiceRequest $request): ShowArticleServiceResponse
     {
         $articleId = $request->getArticleId();
 
-        $article = $this->client->fetchSinglePost($articleId);
+        $article = $this->articleRepository->fetchSinglePost($articleId);
 
-        $comments = $this->client->fetchCommentsByArticleId($articleId);
+        $user = $this->authorRepository->fetchSingleUser($article->getUserId());
+
+        $article->setUser($user);
+
+        $comments = $this->commentRepository->fetchCommentsByArticleId($articleId);
 
         return new ShowArticleServiceResponse($article, $comments);
     }

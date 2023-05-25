@@ -20,3 +20,7 @@ This project is created using php 7.4 language.
 
 
 ## Preview
+
+![Articles](Articles.jpg)
+
+![Author](Author.jpg)

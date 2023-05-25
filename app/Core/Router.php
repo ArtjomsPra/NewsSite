@@ -6,9 +6,17 @@ use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use function FastRoute\simpleDispatcher;
 
+
 class Router
 {
-    public static function response(array $routes)
+    protected $container;
+
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
+    public function response(array $routes)
     {
         $dispatcher = simpleDispatcher(function (RouteCollector $router) use ($routes) {
             foreach ($routes as $route) {
@@ -33,9 +41,9 @@ class Router
                 $handler = $routeInfo[1];
 
                 [$controllerName, $methodName] = $handler;
-                $controllerName = new $controllerName;
+                $controllerInstance = $this->container->getContainer()->get($controllerName);
 
-                return $controllerName->{$methodName}();
+                return $controllerInstance->{$methodName}();
         }
         return null;
     }

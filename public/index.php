@@ -2,12 +2,15 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-Use NewsSite\Core\Router;
-Use NewsSite\Core\Renderer;
+use NewsSite\Core\Container;
+use NewsSite\Core\Renderer;
+use NewsSite\Core\Router;
 
+$container = new Container();
+$router = new Router($container);
 $routes = require_once '../routes.php';
 
-$response = Router::response($routes);
+$response = $router->response($routes);
 $renderer = new Renderer();
 
 echo $renderer->render($response);

@@ -18,6 +18,8 @@
         "ext-json": "*",
         "ext-readline": "*",
         "php-di/php-di": "^6.4",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "doctrine/dbal": "^3.6",
+        "catfan/medoo": "^2.1"
     }
 }

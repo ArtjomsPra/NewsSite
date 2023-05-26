@@ -6,6 +6,9 @@ use NewsSite\Core\Container;
 use NewsSite\Core\Renderer;
 use NewsSite\Core\Router;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
 $container = new Container();
 $router = new Router($container);
 $routes = require_once '../routes.php';

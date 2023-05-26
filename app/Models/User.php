@@ -7,18 +7,18 @@ class User
 
     private int $id;
     private string $name;
-    private string $username;
-    private string $email;
-    private string $city;
-    private string $company;
+    private ?string $username;
+    private ?string $email;
+    private ?string $city;
+    private ?string $company;
 
     public function __construct(
         int    $id,
         string $name,
-        string $username,
-        string $email,
-        string $city,
-        string $company
+        string $username = null,
+        string $email = null,
+        string $city = null,
+        string $company = null
     )
     {
         $this->id = $id;

@@ -9,10 +9,21 @@ use NewsSite\Services\Users\Show\ShowUserService;
 
 class UserController
 {
+    private IndexUserService $indexUserService;
+    private ShowUserService $showUserService;
+
+    public function __construct
+    (
+        IndexUserService $indexUserService,
+        ShowUserService $showUserService
+    )
+    {
+        $this->indexUserService = $indexUserService;
+        $this->showUserService = $showUserService;
+    }
     public function index(): View
     {
-        $service = new IndexUserService();
-        $authors = $service->execute();
+        $authors = $this->indexUserService->execute();
 
         return new View('authors', [
             'authors' => $authors
@@ -22,8 +33,7 @@ class UserController
     public function show(): View
     {
             $authorId = (int)$_GET['authorId'];
-            $service = new ShowUserService();
-            $response = $service->execute(new ShowUserServiceRequest($authorId));
+            $response = $this->showUserService->execute(new ShowUserServiceRequest($authorId));
 
             return new View('author', [
                 'author' => $response->getUser(),

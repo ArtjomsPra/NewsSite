@@ -4,6 +4,7 @@ namespace NewsSite\Core;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use NewsSite\Core\View;
 
 class Renderer
 {

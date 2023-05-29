@@ -3,19 +3,20 @@
 namespace NewsSite\Services\Articles;
 
 use NewsSite\Repositories\Article\ArticleRepository;
-use NewsSite\Repositories\Article\JsonPlaceholderArticleRepository;
 use NewsSite\Repositories\Author\AuthorRepository;
-use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
 
 class IndexArticleService
 {
     private ArticleRepository $articleRepository;
     private AuthorRepository $authorRepository;
 
-    public function __construct()
+    public function __construct(
+        ArticleRepository $articleRepository,
+        AuthorRepository $authorRepository
+    )
     {
-        $this->articleRepository = new JsonPlaceholderArticleRepository();
-        $this->authorRepository = new JsonPlaceholderAuthorRepository();
+        $this->articleRepository = $articleRepository;
+        $this->authorRepository = $authorRepository;
     }
 
     public function execute(): array

@@ -1,13 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace NewsSite\Models;
+namespace NewsSite\Repositories\Article;
 
-use NewsSite\Models\Post;
-use NewsSite\Models\User;
 use GuzzleHttp\Client;
 use Medoo\Medoo;
+use NewsSite\Models\Post;
 
-class Database
+class PdoArticleRepository implements ArticleRepository
 {
     private Medoo $db;
     private Client $client;
@@ -68,19 +67,19 @@ class Database
         ]);
     }
 
-    public function create (string $title, string $body): void
-    {
-        $userId = 11;
-        $postId = ($this->db->max('posts', 'id')) + 1;
+        public function create (string $title, string $body): void
+        {
+            $userId = 11;
+            $postId = ($this->db->max('posts', 'id')) + 1;
 
-        $post = new Post($postId, $userId, $title, $body);
+            $post = new Post($postId, $userId, $title, $body);
 
-        $this->db->insert('posts', [
-            'userid' => $post->getUserId(),
-            'title' => $post->getTitle(),
-            'body' => $post->getBody()
-        ]);
-    }
+            $this->db->insert('posts', [
+                'userid' => $post->getUserId(),
+                'title' => $post->getTitle(),
+                'body' => $post->getBody()
+            ]);
+        }
 
     public function update(int $id, string $title, string $body)
     {

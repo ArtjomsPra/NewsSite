@@ -3,11 +3,8 @@
 namespace NewsSite\Services\Articles\Show;
 
 use NewsSite\Repositories\Article\ArticleRepository;
-use NewsSite\Repositories\Article\JsonPlaceholderArticleRepository;
 use NewsSite\Repositories\Author\AuthorRepository;
-use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
 use NewsSite\Repositories\Comment\CommentRepository;
-use NewsSite\Repositories\Comment\JsonPlaceholderCommentRepository;
 
 class ShowArticleService
 {
@@ -15,11 +12,15 @@ class ShowArticleService
     private AuthorRepository $authorRepository;
     private CommentRepository $commentRepository;
 
-    public function __construct()
+    public function __construct(
+        ArticleRepository $articleRepository,
+        AuthorRepository $authorRepository,
+        CommentRepository $commentRepository
+    )
     {
-        $this->articleRepository = new JsonPlaceholderArticleRepository();
-        $this->authorRepository = new JsonPlaceholderAuthorRepository();
-        $this->commentRepository = new JsonPlaceholderCommentRepository();
+        $this->articleRepository = $articleRepository;
+        $this->authorRepository = $authorRepository;
+        $this->commentRepository = $commentRepository;
     }
 
     public function execute(ShowArticleServiceRequest $request): ShowArticleServiceResponse

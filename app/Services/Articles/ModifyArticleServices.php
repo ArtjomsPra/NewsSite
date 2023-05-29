@@ -2,29 +2,29 @@
 
 namespace NewsSite\Services\Articles;
 
-use NewsSite\Models\Database;
+use NewsSite\Repositories\Article\PdoArticleRepository;
 
 class ModifyArticleServices
 {
-    private Database $database;
+    private PdoArticleRepository $pdoArticleRepository;
 
-    public function __construct(Database $database)
+    public function __construct(PdoArticleRepository $database)
     {
-        $this->database = $database;
+        $this->pdoArticleRepository = $database;
     }
 
     public function create(string $title, string $body): void
     {
-        $this->database->create($title, $body);
+        $this->pdoArticleRepository->create($title, $body);
     }
 
     public function delete(int $id): void
     {
-        $this->database->delete($id);
+        $this->pdoArticleRepository->delete($id);
     }
 
     public function update(int $id, string $title, string $body): void
     {
-        $this->database->update($id, $title, $body);
+        $this->pdoArticleRepository->update($id, $title, $body);
     }
 }

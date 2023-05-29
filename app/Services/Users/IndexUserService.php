@@ -3,16 +3,15 @@
 namespace NewsSite\Services\Users;
 
 use NewsSite\Repositories\Author\AuthorRepository;
-use NewsSite\Repositories\Author\JsonPlaceholderAuthorRepository;
 
 
 class IndexUserService
 {
     private AuthorRepository $authorRepository;
 
-    public function __construct()
+    public function __construct(AuthorRepository $authorRepository)
     {
-        $this->authorRepository = new JsonPlaceholderAuthorRepository();
+        $this->authorRepository = $authorRepository;
     }
 
     public function execute(): array

@@ -20,6 +20,8 @@
         "php-di/php-di": "^6.4",
         "vlucas/phpdotenv": "^5.5",
         "doctrine/dbal": "^3.6",
-        "catfan/medoo": "^2.1"
+        "catfan/medoo": "^2.1",
+        "ext-pdo": "*",
+        "nesbot/carbon": "^2.67"
     }
 }

@@ -30,10 +30,11 @@
                     >
                         Edit Article
                     </a>
-                    <form action="/article/delete" method="POST" class="inline-block">
+                    <form id="delete-form" action="/article/delete" method="POST" class="inline-block">
                         <input type="hidden" name="articleId" value="{{ article.id }}">
-                        <button type="submit" class="inline-flex items-center py-2.5 px-4 text-base font-medium text-center
-                                text-gray-900 rounded-lg bg-red-500 hover:bg-red-600 ml-4">
+                        <button type="button" class="inline-flex items-center py-2.5 px-4 text-base font-medium text-center
+                                text-gray-900 rounded-lg bg-red-500 hover:bg-red-600 ml-4"
+                                onclick="confirmDelete()">
                             Delete Article
                         </button>
                     </form>
@@ -78,4 +79,12 @@
             </article>
         </div>
     </main>
+
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure you want to delete this article?")) {
+                document.getElementById("delete-form").submit();
+            }
+        }
+    </script>
 {% endblock %}

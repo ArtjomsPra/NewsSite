@@ -12,5 +12,5 @@ return [
     ['GET', '/article/update', [PostController::class, 'updateForm']],
     ['POST', '/article/create', [PostController::class, 'create']],
     ['POST', '/article/update', [PostController::class, 'update']],
-    ['POST', '/articles', [PostController::class, 'delete']]
+    ['POST', '/article/delete', [PostController::class, 'delete']]
 ];

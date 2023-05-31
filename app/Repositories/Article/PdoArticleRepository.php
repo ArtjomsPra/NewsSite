@@ -61,10 +61,7 @@ class PdoArticleRepository implements ArticleRepository
 
     public function delete (int $id): void
     {
-        $this->db->delete("posts", [
-            'AND' =>
-                ['id' => $id]
-        ]);
+        $this->db->delete("posts", ['id' => $id]);
     }
 
         public function create (string $title, string $body): void

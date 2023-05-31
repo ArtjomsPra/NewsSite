@@ -39,11 +39,12 @@ class Router
                 return null;
             case Dispatcher::FOUND:
                 $handler = $routeInfo[1];
+                $vars = $routeInfo[2];
 
                 [$controllerName, $methodName] = $handler;
                 $controllerInstance = $this->container->getContainer()->get($controllerName);
 
-                return $controllerInstance->{$methodName}();
+                return $controllerInstance->{$methodName}($vars);
         }
         return null;
     }

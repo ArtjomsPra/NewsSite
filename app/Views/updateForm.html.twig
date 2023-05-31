@@ -5,7 +5,7 @@
     <section class="bg-white">
         <div class="max-w-2xl px-4 py-8 mx-auto">
             <h2 class="mb-4 text-xl font-bold text-gray-900">Edit article</h2>
-            <form action="/article/{{ article.id }}" method="POST">
+            <form action="/article" method="POST">
                 <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                     <div class="sm:col-span-2">
                         <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
@@ -17,7 +17,7 @@
                         <label for="content" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
                         <textarea name="content" id="content" rows="12"
                                   class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                                  placeholder="Write content here...">{{ article.content }}</textarea>
+                                  placeholder="Write content here...">{{ article.body }}</textarea>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">

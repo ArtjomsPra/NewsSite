@@ -4,7 +4,7 @@ namespace NewsSite\Core;
 
 use DI\ContainerBuilder;
 use NewsSite\Repositories\Article\ArticleRepository;
-use NewsSite\Repositories\Article\JsonPlaceholderArticleRepository;
+use NewsSite\Repositories\Article\PdoArticleRepository;
 use NewsSite\Repositories\Comment\CommentRepository;
 use NewsSite\Repositories\Comment\JsonPlaceholderCommentRepository;
 use NewsSite\Repositories\Author\AuthorRepository;
@@ -19,7 +19,7 @@ class Container
        $builder = new ContainerBuilder();
        $builder->addDefinitions([
            AuthorRepository::class => new JsonPlaceholderAuthorRepository(),
-           ArticleRepository::class => new JsonPlaceholderArticleRepository(),
+           ArticleRepository::class => new PdoArticleRepository(),
            CommentRepository::class => new JsonPlaceholderCommentRepository()
        ]);
 

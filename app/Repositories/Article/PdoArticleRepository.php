@@ -69,7 +69,7 @@ class PdoArticleRepository implements ArticleRepository
 
         public function create (string $title, string $body): void
         {
-            $userId = 11;
+            $userId = 10;
             $postId = ($this->db->max('posts', 'id')) + 1;
 
             $post = new Post($postId, $userId, $title, $body);

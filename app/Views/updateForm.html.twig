@@ -5,26 +5,28 @@
     <section class="bg-white">
         <div class="max-w-2xl px-4 py-8 mx-auto">
             <h2 class="mb-4 text-xl font-bold text-gray-900">Edit article</h2>
-            <form action="/article" method="POST">
+            <form action="/article/update" method="POST">
                 <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                     <div class="sm:col-span-2">
+                        <input type="hidden" name="id" value="{{ article.id }}">
                         <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title</label>
                         <input type="text" name="title" id="title"
                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                value="{{ article.title|capitalize }}" placeholder="Type title" required="">
                     </div>
                     <div class="sm:col-span-2">
-                        <label for="content" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
-                        <textarea name="content" id="content" rows="12"
+                        <label for="body" class="block mb-2 text-sm font-medium text-gray-900">Content</label>
+                        <textarea name="body" id="body" rows="12"
                                   class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
                                   placeholder="Write content here...">{{ article.body }}</textarea>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <button type="submit" name="id" value="{{ article.id }}" class="text-black inline-flex items-center hover:text-white border border-gray-500 hover:bg-gray-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        Save
-                    </button>
-                </div>
+                <button type="submit"
+                        class="inline-flex items-center py-2.5 px-4 text-base font-medium text-center
+                        text-gray-900 rounded-lg bg-blue-500 hover:bg-blue-600"
+                >
+                    Save
+                </button>
             </form>
         </div>
     </section>
